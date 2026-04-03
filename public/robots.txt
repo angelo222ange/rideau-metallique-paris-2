@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://depannagerideau-metallique-paris-2.fr/sitemap.xml

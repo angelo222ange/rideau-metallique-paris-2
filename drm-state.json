@@ -1,0 +1,19 @@
+{
+  "ville": "Paris 2",
+  "slug": "paris-2",
+  "domaine": "depannagerideau-metallique-paris-2.fr",
+  "telephone": "09 72 12 41 41",
+  "adresse": "Impasse des Peintres, 75002 Paris",
+  "template_id": "template-6",
+  "current_phase": 6,
+  "phases": {
+    "0": { "status": "completed", "completed_at": "2026-04-03T12:00:00Z" },
+    "1": { "status": "completed", "completed_at": "2026-04-03T12:30:00Z" },
+    "2": { "status": "completed", "completed_at": "2026-04-03T13:00:00Z" },
+    "3": { "status": "completed", "completed_at": "2026-04-03T13:30:00Z" },
+    "4": { "status": "completed", "completed_at": "2026-04-03T14:00:00Z" },
+    "5": { "status": "completed", "completed_at": "2026-04-03T14:30:00Z" },
+    "6": { "status": "pending", "completed_at": null },
+    "7": { "status": "pending", "completed_at": null }
+  }
+}

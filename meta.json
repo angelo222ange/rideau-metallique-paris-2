@@ -1,0 +1,45 @@
+{
+  "id": "template-6",
+  "name": "FixFlow",
+  "source": "https://fixflow.framer.ai/?via=arini",
+  "style": "professional-dark-blue",
+  "match_score": 95,
+  "sections": [
+    "hero-dark-split-stats",
+    "quick-service-form",
+    "about-img-left-checklist",
+    "counter-4stats",
+    "services-6cards-grid",
+    "process-5step-timeline",
+    "why-choose-6features",
+    "google-reviews-dark",
+    "portfolio-6cards-grid",
+    "cta-centered",
+    "faq-accordion-centered",
+    "blog-3cards",
+    "footer-dark-4cols-newsletter"
+  ],
+  "colors": {
+    "primary_dark_blue": "#142F45",
+    "accent_orange": "#FF5E15",
+    "light_bg": "#F1F2FA",
+    "white": "#FFFFFF",
+    "text_gray": "#4B5554"
+  },
+  "fonts": {
+    "heading": "Satoshi",
+    "body": "Satoshi"
+  },
+  "layout": {
+    "max_width": 1200,
+    "container_padding": "120px 30px",
+    "hero_padding": "203px 30px 130px",
+    "card_radius": 16,
+    "button_radius": 58,
+    "button_height": 51,
+    "section_gap": "0px"
+  },
+  "best_for": ["plombier", "depannage", "services-local", "urgence", "artisan"],
+  "created_at": "2026-04-02",
+  "placeholder_images": true
+}
