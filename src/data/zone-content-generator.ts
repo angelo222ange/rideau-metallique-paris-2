@@ -25,6 +25,8 @@ interface ZoneServiceContent {
   typesContext: string;
   localExpertise: string;
   ctaText: string;
+  typesCards: { title: string; text: string }[];
+  statsLabels: { v: string; l: string }[];
 }
 
 // Variantes semantiques pour les H2 — eviter la repetition du meme terme
@@ -120,6 +122,8 @@ export function generateZoneContent(serviceId: string, zoneSlug: string, zoneNam
       typesContext: "",
       localExpertise: "",
       ctaText: "",
+      typesCards: [],
+      statsLabels: [],
     };
   }
 
@@ -192,6 +196,62 @@ export function generateZoneContent(serviceId: string, zoneSlug: string, zoneNam
   // Contexte types — phrase unique qui precede les cards types
   const typesContext = `Dans le secteur de ${nbh[0]} et ${nbh[1] || nbh[0]} a ${zoneName}, les ${commerce[0]} et ${commerce[1] || commerce[0]} rencontrent regulierement ces situations :`;
 
+  // Types cards — ENTIEREMENT uniques par zone (combinaison service + local)
+  const typeTemplates: Record<string, { title: string; text: string }[]> = {
+    depannage: [
+      { title: `Rideau bloque ${streets[0]}`, text: `Lame sortie du rail ou axe grippe. Nos techniciens debloquent votre rideau sans degradation en intervenant via ${metro[0]}. Les ${commerce[0]} de ${nbh[0]} font frequemment appel a ce service.` },
+      { title: `Moteur en panne pres de ${lm[0]}`, text: `Condensateur grille ou carte electronique defaillante. Diagnostic electrique complet sur place avec multimetre. Pieces d'origine Somfy et ACM en stock sur le vehicule.` },
+      { title: `Lames deformees quartier ${nbh[1] || nbh[0]}`, text: `Suite a un choc ou une tentative d'effraction ${streets[1]}. Remplacement des lames endommagees a l'identique, lames P57 ou P90 selon le modele existant.` },
+      { title: `Serrure grippee a ${zoneName}`, text: `Oxydation ou usure du cylindre. Remplacement profil europeen en 20 minutes. Les ${commerce[1] || commerce[0]} pres de ${lm[1] || lm[0]} sont particulierement concernes par l'humidite.` },
+    ],
+    installation: [
+      { title: `Lames pleines pour ${commerce[0]}`, text: `Acier galvanise P57 ou P90, securite maximale pour les ${commerce[0]} ${streets[0]} a ${zoneName}. Fabrication sur-mesure aux dimensions exactes.` },
+      { title: `Micro-perforees quartier ${nbh[0]}`, text: `Aluminium avec petits trous reguliers, ideal pour les vitrines de ${nbh[0]}. Laisse passer lumiere et visibilite tout en protegeant ${streets[1]}.` },
+      { title: `Grille cobra pres de ${lm[0]}`, text: `Tubes acier en motif cobra, resistante aux effractions. Les bijouteries et pharmacies pres de ${lm[0]} choisissent souvent ce modele pour la securite et la visibilite.` },
+      { title: `Rideau motorise ${zoneName}`, text: `Installation complete avec moteur tubulaire Somfy ou central ACM selon le poids. Telecommande et boitier a cle inclus. Intervention via ${metro[0]}.` },
+    ],
+    reparation: [
+      { title: `Remplacement lames ${streets[0]}`, text: `Lames deformees ou perforees remplacees a l'identique. Les ${commerce[0]} de ${nbh[0]} font souvent face a ce type de reparation apres des annees d'usage.` },
+      { title: `Moteur defaillant quartier ${nbh[1] || nbh[0]}`, text: `Reparation condensateur, carte de commande ou embrayage. Les commerces pres de ${lm[0]} beneficient d'un diagnostic electrique complet avec multimetre.` },
+      { title: `Axe et ressorts a ${zoneName}`, text: `Axe grippe ou ressort casse. Depose et reconditionnement par nos techniciens bases a proximite de ${metro[0]}. Intervention en moins de 30 minutes.` },
+      { title: `Serrure et accessoires ${streets[1]}`, text: `Cylindre profil europeen, verrou, poignee, boite a cle. Remplacement avec cles neuves fournies. Les ${commerce[1] || commerce[0]} du secteur nous font confiance.` },
+    ],
+    motorisation: [
+      { title: `Moteur tubulaire pour ${commerce[0]}`, text: `Somfy RS100 ou Simu T5, invisible dans l'axe. Ideal pour les ${commerce[0]} de ${nbh[0]} avec des rideaux de moins de 150 kg. Silencieux et fiable.` },
+      { title: `Moteur central ${streets[0]}`, text: `ACM Titan ou Came, monte sur platine. Pour les rideaux lourds des entrepots et locaux industriels pres de ${lm[0]}. Robuste et puissant.` },
+      { title: `Kit complet a ${zoneName}`, text: `Moteur + boitier 3 boutons + telecommande + cablage. Installation electrique complete par nos techniciens accessible via ${metro[0]} et ${metro[1] || metro[0]}.` },
+      { title: `Debrayage et securite ${nbh[1] || nbh[0]}`, text: `Tous les moteurs sont equipes d'un debrayage manuel. En cas de coupure de courant, les ${commerce[1] || commerce[0]} du quartier peuvent ouvrir le rideau a la main.` },
+    ],
+    deblocage: [
+      { title: `Lame sortie du rail ${streets[0]}`, text: `Cause la plus frequente de blocage. Remise en place sans casse par nos techniciens en intervention pres de ${lm[0]}. Les ${commerce[0]} de ${nbh[0]} sont souvent concernes.` },
+      { title: `Axe grippe quartier ${nbh[1] || nbh[0]}`, text: `Manque de lubrification ou corrosion. Le rideau descend de travers ou refuse de bouger. Nettoyage et graissage complet, accessible via ${metro[0]}.` },
+      { title: `Ressort casse a ${zoneName}`, text: `Le tablier devient trop lourd, le rideau se bloque a mi-hauteur. Remplacement du ressort par nos techniciens equipes. Les ${commerce[1] || commerce[0]} ${streets[1]} appellent souvent pour ca.` },
+      { title: `Gel et oxydation ${lm[1] || lm[0]}`, text: `En hiver, le gel bloque les coulisses et le mecanisme des commerces pres de ${lm[1] || lm[0]}. Application de degivrant et lubrification preventive.` },
+    ],
+    entretien: [
+      { title: `Graissage coulisses ${streets[0]}`, text: `Les coulisses des rideaux des ${commerce[0]} ${streets[0]} s'usent plus vite a cause de l'ouverture frequente. Graissage au spray silicone professionnel.` },
+      { title: `Controle moteur quartier ${nbh[0]}`, text: `Verification de l'intensite, test du condensateur, controle des contacts. Les commerces pres de ${lm[0]} beneficient d'un diagnostic electrique preventif complet.` },
+      { title: `Inspection mecanique ${zoneName}`, text: `Tension des ressorts, alignement des lames, etat du joint EPDM. Nos techniciens bases a proximite de ${metro[0]} effectuent un controle approfondi.` },
+      { title: `Contrat annuel ${nbh[1] || nbh[0]}`, text: `2 visites preventives par an pour les ${commerce[1] || commerce[0]} du quartier ${nbh[1] || nbh[0]}. Rapport detaille et recommandations a chaque passage.` },
+    ],
+    fabrication: [
+      { title: `Acier galvanise pour ${commerce[0]}`, text: `Lames P57 ou P90, fabrication francaise. Ideal pour les ${commerce[0]} ${streets[0]} a ${zoneName}. Sur-mesure aux dimensions exactes.` },
+      { title: `Aluminium thermolaque ${nbh[0]}`, text: `200+ couleurs RAL pour s'integrer aux facades du quartier ${nbh[0]}. Plus leger que l'acier, disponible pres de ${lm[0]}.` },
+      { title: `Coffre sur-mesure ${zoneName}`, text: `Coffre 2 ou 3 faces adapte aux linteaux des immeubles de ${zoneName}. Les devantures ${streets[1]} necessitent souvent des adaptations specifiques.` },
+      { title: `Fabrication express ${lm[1] || lm[0]}`, text: `Delai de 3 jours pour les urgences. Les ${commerce[1] || commerce[0]} pres de ${lm[1] || lm[0]} peuvent beneficier d'une fabrication acceleree.` },
+    ],
+  };
+
+  const typesCards = typeTemplates[serviceId] || typeTemplates.depannage;
+
+  // Stats contextualises par zone
+  const statsLabels = [
+    { v: "25+", l: `Ans a ${zoneName}` },
+    { v: "5000+", l: "Interventions Paris" },
+    { v: "30 min", l: `Delai ${nbh[0]}` },
+    { v: "4.9/5", l: "Avis Google" },
+  ];
+
   // Section expertise locale — 150+ mots UNIQUES par zone
   const localExpertise = `Le ${variants[0]} de ${terms[0]} a ${zoneName} presente des specificites liees a la configuration urbaine du secteur. Les commerces situes ${streets[0]} et ${streets[1]} disposent souvent de devantures etroites avec des rideaux en pose applique, ou le coffre est visible a l'exterieur au-dessus de l'ouverture. Dans le quartier ${nbh[0]}, les immeubles plus anciens imposent parfois des contraintes d'acces pour les interventions en hauteur — nos techniciens sont equipes d'echelles telescopiques et d'outils compacts adaptes a ces situations. Les ${commerce[0]} du secteur de ${lm[0]} representent une part significative de nos interventions, avec des besoins specifiques en termes de securite et de disponibilite. La station de metro ${metro[0]} nous permet d'acceder rapidement au coeur de ${zoneName}, tandis que ${metro[1] || metro[0]} dessert les commerces situes plus en peripherie du quartier ${nbh[1] || nbh[0]}. Nous connaissons les contraintes horaires des commercants de ${zoneName} — ouverture matinale pour les ${commerce[1] || commerce[0]}, fermeture tardive pour les restaurants — et adaptons nos horaires d'intervention en consequence. Le stationnement etant souvent difficile ${streets[2] || streets[0]}, nos vehicules ateliers sont compacts et nos techniciens optimisent le temps sur place grace a un stock embarque complet de pieces detachees.`;
 
@@ -211,5 +271,7 @@ export function generateZoneContent(serviceId: string, zoneSlug: string, zoneNam
     typesContext,
     localExpertise,
     ctaText,
+    typesCards,
+    statsLabels,
   };
 }

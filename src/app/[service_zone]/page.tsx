@@ -2,7 +2,7 @@ import { Metadata } from "next";
 import { siteConfig, services, zones } from "@/config/site";
 import { servicesContent } from "@/data/services-content";
 import { generateZoneContent } from "@/data/zone-content-generator";
-import { zonesLocal } from "../../../content/zones-local";
+import { getReviewsForZone } from "@/data/reviews-pool";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 
@@ -76,13 +76,8 @@ export default async function ServiceZonePage({ params }: { params: Promise<{ se
   // FAQ et pourquoi-nous : version zone si disponible, sinon version service
   const faqItems = (zoneContent?.faq && zoneContent.faq.length > 0) ? zoneContent.faq : svcData.faq;
 
-  // Rotation des reviews par zone — chaque zone montre 3 reviews differentes dans un ordre different
-  const zoneHash = zone.slug.split("").reduce((a, c) => a + c.charCodeAt(0), 0);
-  const rotatedReviews = [...svcData.reviews].sort((a, b) => {
-    const ha = (a.name.charCodeAt(0) + zoneHash) % 100;
-    const hb = (b.name.charCodeAt(0) + zoneHash) % 100;
-    return ha - hb;
-  }).slice(0, isCityLevel ? 6 : 4);
+  // Reviews depuis le pool de 30 — 4 uniques par zone via hash deterministe
+  const rotatedReviews = isCityLevel ? svcData.reviews : getReviewsForZone(service.id, zone.slug, 4);
   const whyUsCards = (zoneContent?.whyUsCards && zoneContent.whyUsCards.length > 0) ? zoneContent.whyUsCards : [
     { t: "Intervention en 30 min", d: "Techniciens bases a Paris, deplacement rapide." },
     { t: "Devis gratuit", d: "Prix communique avant intervention." },
@@ -95,19 +90,20 @@ export default async function ServiceZonePage({ params }: { params: Promise<{ se
   const localExpertise = zoneContent?.localExpertise || "";
   const ctaText = zoneContent?.ctaText || `Besoin d'un ${service.name.toLowerCase()} de rideau metallique a ${zone.name} ? Appelez maintenant.`;
 
-  // Types cards — ajoute du contexte local si zone disponible
-  const typesCards = svcData.types.map((t, i) => {
-    if (!zoneContent || !zonesLocal[zone.slug]) return t;
-    const local = zonesLocal[zone.slug];
-    // Ajoute une phrase locale differente par card (rotation par index)
-    const localAddons = [
-      `Frequemment rencontre pres de ${local.landmarks[0]} a ${zone.name}.`,
-      `Les ${local.commerceTypes[0]} ${local.streets[i % local.streets.length]} sont particulierement concernes.`,
-      `Nos techniciens interviennent via ${local.metroStations[i % local.metroStations.length]} pour ce type de situation.`,
-      `Les commerces du quartier ${local.neighborhoods[i % local.neighborhoods.length]} font souvent face a ce probleme.`,
-    ];
-    return { ...t, text: t.text + " " + localAddons[i % localAddons.length] };
-  });
+  // Types cards — entierement uniques par zone depuis le generateur
+  const typesCards = (zoneContent?.typesCards && zoneContent.typesCards.length > 0)
+    ? zoneContent.typesCards
+    : svcData.types;
+
+  // Stats contextualises par zone
+  const statsLabels = (zoneContent?.statsLabels && zoneContent.statsLabels.length > 0)
+    ? zoneContent.statsLabels
+    : [
+        { v: "25+", l: "Ans d'experience" },
+        { v: "5000+", l: "Interventions" },
+        { v: "24h/24", l: "Disponibilite" },
+        { v: "4.9/5", l: "Note Google" },
+      ];
 
   return (
     <>
@@ -139,12 +135,7 @@ export default async function ServiceZonePage({ params }: { params: Promise<{ se
         {/* 2. Stats */}
         <section style={{ padding: "40px 30px", backgroundColor: "#0F2B21" }}>
           <div style={{ maxWidth: 1200, margin: "0 auto", display: "flex", justifyContent: "space-around", flexWrap: "wrap", gap: 24 }}>
-            {[
-              { v: "25+", l: "Ans d'experience" },
-              { v: "5000+", l: "Interventions" },
-              { v: "24h/24", l: "Disponibilite" },
-              { v: "4.9/5", l: "Note Google" },
-            ].map((s) => (
+            {statsLabels.map((s) => (
               <div key={s.l} style={{ textAlign: "center" }}>
                 <div style={{ fontFamily: "Urbanist, sans-serif", fontSize: 32, fontWeight: 700, color: "#C9A84C" }}>{s.v}</div>
                 <div style={{ fontFamily: "Urbanist, sans-serif", fontSize: 13, color: "rgba(255,255,255,0.6)" }}>{s.l}</div>
