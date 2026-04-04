@@ -34,8 +34,10 @@ export default function RootLayout({
   return (
     <html lang="fr" className={urbanist.variable}>
       <head>
-        <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+        <link rel="icon" href="/images/logos/favicon.png" type="image/png" sizes="32x32" />
         <link rel="icon" href="/favicon.ico" sizes="any" />
+        <link rel="apple-touch-icon" href="/images/logos/apple-touch-icon.png" />
+        <link rel="manifest" href="/manifest.json" />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{

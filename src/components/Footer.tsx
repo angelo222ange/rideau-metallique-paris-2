@@ -47,23 +47,13 @@ export default function Footer() {
           {/* Col 1 - Company */}
           <div>
             <div style={{ display: "flex", alignItems: "center", gap: 8, marginBottom: 24 }}>
-              <div
-                style={{
-                  width: 32,
-                  height: 32,
-                  backgroundColor: "#C9A84C",
-                  borderRadius: 6,
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                  fontFamily: "Urbanist, sans-serif",
-                  fontSize: 14,
-                  fontWeight: 800,
-                  color: "#1B4332",
-                }}
-              >
-                D
-              </div>
+              <img
+                src="/images/logos/favicon.png"
+                alt="DRM Paris 2"
+                width={32}
+                height={32}
+                style={{ borderRadius: 6 }}
+              />
               <span style={{ fontFamily: "Urbanist, sans-serif", fontSize: 22, fontWeight: 700, color: "#FFFFFF" }}>
                 DRM <span style={{ fontWeight: 400, opacity: 0.7 }}>Paris 2</span>
               </span>
