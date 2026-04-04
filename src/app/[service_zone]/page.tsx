@@ -6,16 +6,43 @@ import { getReviewsForZone } from "@/data/reviews-pool";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 
+// REGLE SOURCE : on ne genere QUE les pages qui ont du contenu unique
+// Pas de JSON subcity = pas de page = zero duplicate content
+import fs from "fs";
+import path from "path";
+
+function getSubcityPages(): string[] {
+  const dir = path.join(process.cwd(), "content/pages/subcity");
+  try {
+    return fs.readdirSync(dir)
+      .filter((f) => f.endsWith(".json"))
+      .map((f) => f.replace(".json", ""));
+  } catch {
+    return [];
+  }
+}
+
 export function generateStaticParams() {
   const params: { service_zone: string }[] = [];
-  for (const zone of zones) {
-    for (const service of services) {
-      params.push({ service_zone: `${service.slug}-${zone.slug}` });
-    }
-  }
+
+  // Pages city-level (7 pages) — contenu unique dans services-content.ts
   for (const service of services) {
     params.push({ service_zone: `${service.slug}-${siteConfig.citySlug}` });
   }
+
+  // Pages subcity — UNIQUEMENT celles qui ont un JSON avec contenu ecrit
+  const subcityFiles = getSubcityPages();
+  for (const file of subcityFiles) {
+    // fichier = "depannage-paris-1er" → slug = "depannage-rideau-metallique-paris-1er"
+    const parts = file.split("-");
+    const serviceId = parts[0];
+    const zoneSlug = parts.slice(1).join("-");
+    const service = services.find((s) => s.id === serviceId);
+    if (service) {
+      params.push({ service_zone: `${service.slug}-${zoneSlug}` });
+    }
+  }
+
   return params;
 }
 
@@ -61,20 +88,31 @@ export default async function ServiceZonePage({ params }: { params: Promise<{ se
   const svcData = servicesContent[service.id] || servicesContent.depannage;
   const phone = siteConfig.phone;
 
-  // Contenu UNIQUE par page : combine donnees service + donnees locales de la zone
+  // PRIORITE 1 : contenu ecrit manuellement (JSON par page)
+  // PRIORITE 2 : contenu genere (zone-content-generator)
+  // PRIORITE 3 : contenu service (services-content)
+  let subcityData: Record<string, string | { q: string; a: string }[]> | null = null;
+  if (!isCityLevel) {
+    try {
+      subcityData = require(`../../../content/pages/subcity/${service.id}-${zone.slug}.json`);
+    } catch {
+      // Pas de JSON subcity pour cette page — fallback sur le generateur
+    }
+  }
+
   const zoneContent = isCityLevel ? null : generateZoneContent(service.id, zone.slug, zone.name);
 
-  // Pour les pages city-level, on utilise le contenu service complet (deja unique par service)
-  // Pour les pages zone, on utilise le contenu genere dynamiquement (unique par zone x service)
-  const introTitle = zoneContent?.introTitle || svcData.introTitle;
-  const introText = zoneContent?.introText || svcData.introText;
-  const seo1Title = zoneContent?.seo1Title || svcData.seo1Title;
-  const seo1Text = zoneContent?.seo1Text || svcData.seo1Text;
-  const seo2Title = zoneContent?.seo2Title || svcData.seo2Title;
-  const seo2Text = zoneContent?.seo2Text || svcData.seo2Text;
+  // Contenu avec cascade : JSON subcity > generateur > service
+  const introTitle = (subcityData?.intro_title as string) || zoneContent?.introTitle || svcData.introTitle;
+  const introText = (subcityData?.intro_text as string) || zoneContent?.introText || svcData.introText;
+  const seo1Title = (subcityData?.seo1_title as string) || zoneContent?.seo1Title || svcData.seo1Title;
+  const seo1Text = (subcityData?.seo1_text as string) || zoneContent?.seo1Text || svcData.seo1Text;
+  const seo2Title = (subcityData?.seo2_title as string) || zoneContent?.seo2Title || svcData.seo2Title;
+  const seo2Text = (subcityData?.seo2_text as string) || zoneContent?.seo2Text || svcData.seo2Text;
   const localContext = zoneContent?.localContext || "";
   // FAQ et pourquoi-nous : version zone si disponible, sinon version service
-  const faqItems = (zoneContent?.faq && zoneContent.faq.length > 0) ? zoneContent.faq : svcData.faq;
+  const subcityFaq = subcityData?.faq as { q: string; a: string }[] | undefined;
+  const faqItems = (subcityFaq && subcityFaq.length > 0) ? subcityFaq : (zoneContent?.faq && zoneContent.faq.length > 0) ? zoneContent.faq : svcData.faq;
 
   // Reviews depuis le pool de 30 — 4 uniques par zone via hash deterministe
   const rotatedReviews = isCityLevel ? svcData.reviews : getReviewsForZone(service.id, zone.slug, 4);
@@ -87,7 +125,7 @@ export default async function ServiceZonePage({ params }: { params: Promise<{ se
     { t: "24h/24, 7j/7", d: "Nuits, week-ends, jours feries sans majoration." },
   ];
   const typesContext = zoneContent?.typesContext || "";
-  const localExpertise = zoneContent?.localExpertise || "";
+  const localExpertise = (subcityData?.local_expertise as string) || zoneContent?.localExpertise || "";
   const ctaText = zoneContent?.ctaText || `Besoin d'un ${service.name.toLowerCase()} de rideau metallique a ${zone.name} ? Appelez maintenant.`;
 
   // Types cards — entierement uniques par zone depuis le generateur
