@@ -350,23 +350,21 @@ export default async function ServiceZonePage({ params }: { params: Promise<{ se
           </div>
         </section>
 
-        {/* 11b. Maillage ZONES autour */}
-        {!isCityLevel && (
-          <section style={{ padding: "50px 30px", backgroundColor: "#F5F0E8" }}>
-            <div style={{ maxWidth: 1200, margin: "0 auto" }}>
-              <h2 style={{ fontFamily: "Urbanist, sans-serif", fontSize: 22, fontWeight: 600, color: "#1B4332", marginBottom: 20, marginTop: 0 }}>
-                {service.name} rideau metallique dans les zones proches
-              </h2>
-              <div style={{ display: "flex", flexWrap: "wrap", gap: 10 }}>
-                {zones.filter((z) => z.slug !== zone.slug).slice(0, 8).map((z) => (
-                  <a key={z.slug} href={`/${service.slug}-${z.slug}/`} style={{ fontFamily: "Urbanist, sans-serif", fontSize: 13, fontWeight: 500, color: "#1B4332", backgroundColor: "#FFFFFF", padding: "8px 16px", borderRadius: 50, textDecoration: "none", border: "1px solid #E5E5E5" }}>
-                    {service.name} {z.name}
-                  </a>
-                ))}
-              </div>
+        {/* 11b. Maillage ZONES autour — sur TOUTES les pages (city-level + subcity) */}
+        <section style={{ padding: "50px 30px", backgroundColor: "#F5F0E8" }}>
+          <div style={{ maxWidth: 1200, margin: "0 auto" }}>
+            <h2 style={{ fontFamily: "Urbanist, sans-serif", fontSize: 22, fontWeight: 600, color: "#1B4332", marginBottom: 20, marginTop: 0 }}>
+              {service.name} rideau metallique dans les zones proches
+            </h2>
+            <div style={{ display: "flex", flexWrap: "wrap", gap: 10 }}>
+              {zones.filter((z) => z.slug !== zone.slug).slice(0, 10).map((z) => (
+                <a key={z.slug} href={`/${service.slug}-${z.slug}/`} style={{ fontFamily: "Urbanist, sans-serif", fontSize: 13, fontWeight: 500, color: "#1B4332", backgroundColor: "#FFFFFF", padding: "8px 16px", borderRadius: 50, textDecoration: "none", border: "1px solid #E5E5E5" }}>
+                  {service.name} {z.name}
+                </a>
+              ))}
             </div>
-          </section>
-        )}
+          </div>
+        </section>
 
         {/* 12. CTA */}
         <section style={{ padding: "80px 30px", backgroundColor: "#1B4332", textAlign: "center" }}>
