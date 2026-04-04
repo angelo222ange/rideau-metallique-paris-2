@@ -25,7 +25,6 @@ export default function PlanDuSitePage() {
               <h2 style={{ fontFamily: "Urbanist, sans-serif", fontSize: 18, fontWeight: 600, color: "#1B4332", marginBottom: 16 }}>Pages principales</h2>
               <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
                 <Link href="/" style={{ fontFamily: "Urbanist, sans-serif", fontSize: 14, color: "#555", textDecoration: "none" }}>Accueil</Link>
-                <Link href="/tarifs/" style={{ fontFamily: "Urbanist, sans-serif", fontSize: 14, color: "#555", textDecoration: "none" }}>Tarifs</Link>
                 <Link href="/zones/" style={{ fontFamily: "Urbanist, sans-serif", fontSize: 14, color: "#555", textDecoration: "none" }}>Zones</Link>
                 <Link href="/blog/" style={{ fontFamily: "Urbanist, sans-serif", fontSize: 14, color: "#555", textDecoration: "none" }}>Blog</Link>
                 <Link href="/contact/" style={{ fontFamily: "Urbanist, sans-serif", fontSize: 14, color: "#555", textDecoration: "none" }}>Contact</Link>

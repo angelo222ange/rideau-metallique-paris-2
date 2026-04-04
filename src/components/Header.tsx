@@ -182,9 +182,6 @@ export default function Header() {
               )}
             </div>
 
-            <Link href="/tarifs/" style={{ fontFamily: "Urbanist, sans-serif", fontSize: 15, fontWeight: 500, color: "#C9A84C", textDecoration: "none" }}>
-              Tarifs
-            </Link>
             <Link href="/zones/" style={{ fontFamily: "Urbanist, sans-serif", fontSize: 15, fontWeight: 500, color: "#C9A84C", textDecoration: "none" }}>
               Zones
             </Link>
@@ -272,9 +269,6 @@ export default function Header() {
               ))}
             </div>
 
-            <Link href="/tarifs/" onClick={() => setMobileOpen(false)} style={{ fontFamily: "Urbanist, sans-serif", fontSize: 18, fontWeight: 500, color: "#FFFFFF", textDecoration: "none", padding: "16px 0", borderBottom: "1px solid rgba(255,255,255,0.1)" }}>
-              Tarifs
-            </Link>
             <Link href="/zones/" onClick={() => setMobileOpen(false)} style={{ fontFamily: "Urbanist, sans-serif", fontSize: 18, fontWeight: 500, color: "#FFFFFF", textDecoration: "none", padding: "16px 0", borderBottom: "1px solid rgba(255,255,255,0.1)" }}>
               Zones
             </Link>

@@ -265,14 +265,9 @@ export default async function ServiceZonePage({ params }: { params: Promise<{ se
               <h2 style={{ fontFamily: "Urbanist, sans-serif", fontSize: 28, fontWeight: 600, color: "#1B4332", margin: 0 }}>
                 Avis clients — {service.name} rideau metallique
               </h2>
-              <div style={{ display: "flex", gap: 2 }}>
-                <span style={{ color: "#4285F4", fontSize: 18, fontWeight: 700, fontFamily: "Urbanist" }}>G</span>
-                <span style={{ color: "#EA4335", fontSize: 18, fontWeight: 700, fontFamily: "Urbanist" }}>o</span>
-                <span style={{ color: "#FBBC05", fontSize: 18, fontWeight: 700, fontFamily: "Urbanist" }}>o</span>
-                <span style={{ color: "#4285F4", fontSize: 18, fontWeight: 700, fontFamily: "Urbanist" }}>g</span>
-                <span style={{ color: "#34A853", fontSize: 18, fontWeight: 700, fontFamily: "Urbanist" }}>l</span>
-                <span style={{ color: "#EA4335", fontSize: 18, fontWeight: 700, fontFamily: "Urbanist" }}>e</span>
-                <span style={{ fontFamily: "Urbanist", fontSize: 14, color: "#888", marginLeft: 8 }}>4.9/5</span>
+              <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
+                <img src="/images/gallery/logo-google.webp" alt="Avis Google" style={{ height: 24, width: "auto" }} />
+                <span style={{ fontFamily: "Urbanist", fontSize: 14, color: "#888" }}>4.9/5</span>
               </div>
             </div>
             <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 16 }} className="reviews-svc-grid">
@@ -325,6 +320,24 @@ export default async function ServiceZonePage({ params }: { params: Promise<{ se
             </div>
           </div>
         </section>
+
+        {/* 11b. Maillage ZONES autour */}
+        {!isCityLevel && (
+          <section style={{ padding: "50px 30px", backgroundColor: "#F5F0E8" }}>
+            <div style={{ maxWidth: 1200, margin: "0 auto" }}>
+              <h2 style={{ fontFamily: "Urbanist, sans-serif", fontSize: 22, fontWeight: 600, color: "#1B4332", marginBottom: 20, marginTop: 0 }}>
+                {service.name} rideau metallique dans les zones proches
+              </h2>
+              <div style={{ display: "flex", flexWrap: "wrap", gap: 10 }}>
+                {zones.filter((z) => z.slug !== zone.slug).slice(0, 8).map((z) => (
+                  <a key={z.slug} href={`/${service.slug}-${z.slug}/`} style={{ fontFamily: "Urbanist, sans-serif", fontSize: 13, fontWeight: 500, color: "#1B4332", backgroundColor: "#FFFFFF", padding: "8px 16px", borderRadius: 50, textDecoration: "none", border: "1px solid #E5E5E5" }}>
+                    {service.name} {z.name}
+                  </a>
+                ))}
+              </div>
+            </div>
+          </section>
+        )}
 
         {/* 12. CTA */}
         <section style={{ padding: "80px 30px", backgroundColor: "#1B4332", textAlign: "center" }}>

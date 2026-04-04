@@ -31,10 +31,10 @@ export default function SEOContent2() {
           </h2>
           <div style={{ fontFamily: "Urbanist, sans-serif", fontSize: 16, color: "#555", lineHeight: 1.8 }}>
             <p style={{ marginBottom: 16 }}>
-              Les rideaux metalliques des commerces parisiens subissent des contraintes quotidiennes : ouvertures et fermetures repetees, vibrations du trafic, tentatives d&apos;effraction, intemperies. Les pannes les plus frequentes dans le 2e arrondissement concernent le moteur (condensateur HS, carte electronique defaillante, surchauffe), les lames (deformation apres choc, corrosion, sortie de rail) et le mecanisme d&apos;enroulement (ressorts casses, axe grippe).
+              Les <strong>rideaux metalliques</strong> des commerces parisiens subissent des contraintes quotidiennes : ouvertures et fermetures repetees, vibrations du trafic, tentatives d&apos;effraction, intemperies. Les pannes les plus frequentes dans le 2e arrondissement concernent le moteur (condensateur HS, carte electronique defaillante, surchauffe), les lames (deformation apres choc, corrosion, sortie de rail) et le mecanisme d&apos;enroulement (ressorts casses, axe grippe).
             </p>
             <p style={{ marginBottom: 16 }}>
-              Un rideau de fer bloque a mi-hauteur est le signe classique d&apos;une lame sortie de sa coulisse laterale ou d&apos;un ressort de compensation rompu. Le deblocage necessite un savoir-faire specifique pour eviter d&apos;aggraver les dommages : nos techniciens utilisent un outillage adapte (pieds-de-biche plats, pinces de reglage) et reintroduisent la lame dans son rail sans forcer sur le mecanisme.
+              Un <strong>rideau de fer</strong> bloque a mi-hauteur est le signe classique d&apos;une lame sortie de sa coulisse laterale ou d&apos;un ressort de compensation rompu. Le deblocage necessite un savoir-faire specifique pour eviter d&apos;aggraver les dommages : nos techniciens utilisent un outillage adapte (pieds-de-biche plats, pinces de reglage) et reintroduisent la lame dans son rail sans forcer sur le mecanisme.
             </p>
             <p>
               La motorisation defaillante represente pres de 40% de nos interventions a Paris. Un moteur central ACM qui ne repond plus peut etre lie a un simple condensateur grille (reparation 30 minutes, 80 a 150 euros) ou a une carte de commande HS (remplacement en 1 heure). Nos techniciens effectuent un diagnostic electrique complet avec multimetre avant de proposer la solution la plus economique entre reparation et remplacement.

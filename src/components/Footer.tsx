@@ -14,7 +14,6 @@ const serviceLinks = [
 
 const quickLinks = [
   { name: "Accueil", href: "/" },
-  { name: "Tarifs", href: "/tarifs/" },
   { name: "Zones", href: "/zones/" },
   { name: "Blog", href: "/blog/" },
   { name: "Contact", href: "/contact/" },

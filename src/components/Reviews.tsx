@@ -101,14 +101,7 @@ export default function Reviews() {
 
           {/* Google badge */}
           <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
-            <div style={{ display: "flex", gap: 2 }}>
-              <span style={{ color: "#4285F4", fontSize: 22, fontWeight: 700, fontFamily: "Urbanist, sans-serif" }}>G</span>
-              <span style={{ color: "#EA4335", fontSize: 22, fontWeight: 700, fontFamily: "Urbanist, sans-serif" }}>o</span>
-              <span style={{ color: "#FBBC05", fontSize: 22, fontWeight: 700, fontFamily: "Urbanist, sans-serif" }}>o</span>
-              <span style={{ color: "#4285F4", fontSize: 22, fontWeight: 700, fontFamily: "Urbanist, sans-serif" }}>g</span>
-              <span style={{ color: "#34A853", fontSize: 22, fontWeight: 700, fontFamily: "Urbanist, sans-serif" }}>l</span>
-              <span style={{ color: "#EA4335", fontSize: 22, fontWeight: 700, fontFamily: "Urbanist, sans-serif" }}>e</span>
-            </div>
+            <img src="/images/gallery/logo-google.webp" alt="Avis Google" style={{ height: 28, width: "auto" }} />
             <span style={{ fontFamily: "Urbanist, sans-serif", fontSize: 14, fontWeight: 500, color: "#555" }}>
               4.9/5 — Avis verifies
             </span>

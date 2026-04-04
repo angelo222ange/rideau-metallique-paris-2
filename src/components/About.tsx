@@ -48,9 +48,9 @@ export default function About() {
             marginBottom: 48,
           }}
         >
-          DRM Paris 2 intervient dans le quartier du Sentier, de la Bourse et des
-          Grands Boulevards pour le depannage, la reparation et l&apos;installation
-          de rideaux metalliques. Nos techniciens certifies se deplacent avec un
+          <strong>DRM Paris 2</strong> intervient dans le quartier du Sentier, de la Bourse et des
+          Grands Boulevards pour le <strong>depannage</strong>, la <strong>reparation</strong> et l&apos;<strong>installation</strong>
+          de <strong>rideaux metalliques</strong>. Nos techniciens certifies se deplacent avec un
           vehicule atelier equipe de toutes les pieces necessaires.
         </p>
 

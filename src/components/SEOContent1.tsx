@@ -22,7 +22,7 @@ export default function SEOContent1() {
           </h2>
           <div style={{ fontFamily: "Urbanist, sans-serif", fontSize: 16, color: "#555", lineHeight: 1.8 }}>
             <p style={{ marginBottom: 16 }}>
-              Votre rideau metallique est bloque rue du Sentier, rue Montmartre ou pres de la place de la Bourse ? DRM Paris 2 deploie ses techniciens certifies en moins de 30 minutes dans tout le 2e arrondissement. Que votre fermeture metallique soit coincee a mi-hauteur, que le moteur ne reponde plus ou que les lames soient deformees apres une tentative d&apos;effraction, nous avons la solution adaptee.
+              Votre <strong>rideau metallique</strong> est bloque rue du Sentier, rue Montmartre ou pres de la place de la Bourse ? <strong>DRM Paris 2</strong> deploie ses techniciens certifies en moins de <strong>30 minutes</strong> dans tout le 2e arrondissement. Que votre <strong>fermeture metallique</strong> soit coincee a mi-hauteur, que le moteur ne reponde plus ou que les lames soient deformees apres une tentative d&apos;effraction, nous avons la solution adaptee.
             </p>
             <p style={{ marginBottom: 16 }}>
               Nos vehicules ateliers sont equipes en permanence de pieces detachees d&apos;origine : lames P57 et P90, moteurs centraux ACM et tubulaires Somfy, ressorts de compensation, serrures a profil europeen et boitiers de commande. Cette autonomie nous permet de reparer la majorite des pannes en une seule intervention, sans allers-retours couteux.

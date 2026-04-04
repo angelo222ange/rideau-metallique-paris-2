@@ -77,8 +77,8 @@ export default function Hero() {
               lineHeight: 1.6,
             }}
           >
-            Intervention urgence 24h/24, 7j/7 sur tous types de rideaux metalliques,
-            grilles et fermetures metalliques dans le 2e arrondissement de Paris.
+            Intervention urgence <strong>24h/24, 7j/7</strong> sur tous types de <strong>rideaux metalliques</strong>,
+            grilles et <strong>fermetures metalliques</strong> dans le 2e arrondissement de Paris.
           </p>
 
           {/* CTA Row */}
