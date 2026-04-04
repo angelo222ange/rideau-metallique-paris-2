@@ -1,76 +1,28 @@
 import type { Metadata } from "next";
-import { siteConfig } from "@/config/site";
+import { Urbanist } from "next/font/google";
 import "./globals.css";
 
+const urbanist = Urbanist({
+  variable: "--font-urbanist",
+  subsets: ["latin"],
+  weight: ["300", "400", "500", "600", "700", "800"],
+});
+
 export const metadata: Metadata = {
-  title: `Depannage Rideau Metallique Paris 2 (75002) | ${siteConfig.phone}`,
-  description: `Depannage rideau metallique Paris 2e arrondissement. Intervention urgente 24h/24, 7j/7. Techniciens certifies, devis gratuit. Appelez le ${siteConfig.phone}.`,
+  title: "Depannage Rideau Metallique Paris 2 (75002) | DRM 24h/24",
+  description:
+    "Depannage rideau metallique Paris 2e arrondissement. Intervention urgence 24h/24, 7j/7. Techniciens certifies, devis gratuit. Appelez le 09 72 12 41 41.",
+  metadataBase: new URL("https://depannagerideau-metallique-paris-2.fr"),
   alternates: {
-    canonical: siteConfig.url,
+    canonical: "https://depannagerideau-metallique-paris-2.fr",
   },
   openGraph: {
-    title: `Depannage Rideau Metallique Paris 2 | ${siteConfig.phone}`,
-    description: `Intervention urgente 24h/24 sur rideaux metalliques, grilles et fermetures a Paris 2e. Devis gratuit. ${siteConfig.phone}`,
-    url: siteConfig.url,
-    siteName: siteConfig.fullName,
+    title: "Depannage Rideau Metallique Paris 2 | DRM 24h/24",
+    description: "Intervention urgence rideau metallique Paris 2e. Techniciens certifies, 25+ ans d'experience. 09 72 12 41 41.",
+    url: "https://depannagerideau-metallique-paris-2.fr",
+    siteName: "DRM Paris 2",
     locale: "fr_FR",
     type: "website",
-  },
-};
-
-const schemaLocalBusiness = {
-  "@context": "https://schema.org",
-  "@type": "LocalBusiness",
-  "@id": `${siteConfig.url}/#localbusiness`,
-  name: siteConfig.fullName,
-  image: `${siteConfig.url}/images/logos/favicon.png`,
-  telephone: siteConfig.phone,
-  email: siteConfig.email,
-  url: siteConfig.url,
-  address: {
-    "@type": "PostalAddress",
-    streetAddress: "Impasse des Peintres",
-    addressLocality: "Paris",
-    postalCode: siteConfig.postalCode,
-    addressRegion: siteConfig.region,
-    addressCountry: "FR",
-  },
-  geo: {
-    "@type": "GeoCoordinates",
-    latitude: siteConfig.geo.latitude,
-    longitude: siteConfig.geo.longitude,
-  },
-  openingHoursSpecification: {
-    "@type": "OpeningHoursSpecification",
-    dayOfWeek: [
-      "Monday", "Tuesday", "Wednesday", "Thursday",
-      "Friday", "Saturday", "Sunday",
-    ],
-    opens: "00:00",
-    closes: "23:59",
-  },
-  aggregateRating: {
-    "@type": "AggregateRating",
-    ratingValue: siteConfig.rating,
-    reviewCount: siteConfig.ratingCount,
-    bestRating: "5",
-  },
-  priceRange: "$$",
-  areaServed: {
-    "@type": "City",
-    name: "Paris",
-  },
-};
-
-const schemaWebSite = {
-  "@context": "https://schema.org",
-  "@type": "WebSite",
-  name: siteConfig.fullName,
-  url: siteConfig.url,
-  potentialAction: {
-    "@type": "SearchAction",
-    target: `${siteConfig.url}/?q={search_term_string}`,
-    "query-input": "required name=search_term_string",
   },
 };
 
@@ -80,18 +32,61 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="fr">
+    <html lang="fr" className={urbanist.variable}>
       <head>
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
-            __html: JSON.stringify(schemaLocalBusiness),
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "LocalBusiness",
+              name: "DRM Paris 2 — Depannage Rideau Metallique",
+              image: "https://depannagerideau-metallique-paris-2.fr/images/gallery/hero-bg-technicien-drm.webp",
+              url: "https://depannagerideau-metallique-paris-2.fr",
+              telephone: "+33972124141",
+              email: "contact@depannagerideau-metallique-paris-2.fr",
+              address: {
+                "@type": "PostalAddress",
+                streetAddress: "Impasse des Peintres",
+                addressLocality: "Paris",
+                postalCode: "75002",
+                addressRegion: "Ile-de-France",
+                addressCountry: "FR",
+              },
+              geo: {
+                "@type": "GeoCoordinates",
+                latitude: 48.8687,
+                longitude: 2.3412,
+              },
+              openingHoursSpecification: {
+                "@type": "OpeningHoursSpecification",
+                dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
+                opens: "00:00",
+                closes: "23:59",
+              },
+              aggregateRating: {
+                "@type": "AggregateRating",
+                ratingValue: "4.9",
+                reviewCount: "5",
+                bestRating: "5",
+              },
+              priceRange: "$$",
+              areaServed: {
+                "@type": "City",
+                name: "Paris 2e arrondissement",
+              },
+            }),
           }}
         />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
-            __html: JSON.stringify(schemaWebSite),
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "WebSite",
+              name: "DRM Paris 2",
+              url: "https://depannagerideau-metallique-paris-2.fr",
+            }),
           }}
         />
       </head>
@@ -99,7 +94,9 @@ export default function RootLayout({
         style={{
           margin: 0,
           padding: 0,
-          fontFamily: "Satoshi, system-ui, sans-serif",
+          fontFamily: "Urbanist, sans-serif",
+          backgroundColor: "#FFFFFF",
+          color: "#1B4332",
         }}
       >
         {children}

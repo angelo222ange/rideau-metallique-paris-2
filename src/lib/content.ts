@@ -51,8 +51,8 @@ export function getServiceBySlug(slug: string) {
   return services.find((s) => s.slug === slug || s.id === slug);
 }
 
-export function generateSlug(service: string, zone: string): string {
-  return `${service}-${zone}`;
+export function generateSlug(serviceSlug: string, zoneSlug: string): string {
+  return `${serviceSlug}-${zoneSlug}`;
 }
 
 export function parseSlug(slug: string): { serviceSlug: string; zoneSlug: string } | null {
@@ -63,16 +63,11 @@ export function parseSlug(slug: string): { serviceSlug: string; zoneSlug: string
         return { serviceSlug: service.slug, zoneSlug: zone.slug };
       }
     }
-  }
-
-  // Check for city-level service pages (e.g. depannage-rideau-metallique-paris-2)
-  const citySlug = siteConfig.city.toLowerCase().replace(/\s+/g, "-");
-  for (const service of services) {
-    const expected = `${service.slug}-${citySlug}`;
-    if (slug === expected) {
-      return { serviceSlug: service.slug, zoneSlug: citySlug };
+    // Check city-level service pages
+    const cityExpected = `${service.slug}-${siteConfig.citySlug}`;
+    if (slug === cityExpected) {
+      return { serviceSlug: service.slug, zoneSlug: siteConfig.citySlug };
     }
   }
-
   return null;
 }

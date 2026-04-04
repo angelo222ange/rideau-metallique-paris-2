@@ -11,9 +11,18 @@ html {
 }
 
 body {
-  font-family: Satoshi, system-ui, sans-serif;
-  color: #1C2541;
-  background: #FFFFFF;
+  font-family: var(--font-urbanist), "Urbanist", sans-serif;
+  background-color: #ffffff;
+  color: #1B4332;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+::selection {
+  background-color: #C9A84C;
+  color: #1B4332;
+}
+
+input::placeholder {
+  color: rgba(255, 255, 255, 0.4);
 }

@@ -1,148 +1,92 @@
-import { siteConfig, colors } from "@/config/site";
-
 export default function About() {
-  const checklistItems = [
-    "Techniciens certifies et experimentes",
-    "Intervention en moins de 30 minutes",
-    "Devis gratuit, sans engagement",
-    "Garantie pieces et main-d'oeuvre",
-  ];
-
   return (
     <section
       id="about"
       style={{
-        minHeight: 531,
-        padding: "0px 30px",
+        padding: "120px 30px 60px",
         backgroundColor: "#FFFFFF",
       }}
     >
-      <div
-        style={{
-          maxWidth: 1200,
-          margin: "0 auto",
-          display: "flex",
-          flexDirection: "row",
-          alignItems: "center",
-          gap: 60,
-        }}
-      >
-        {/* Left Image */}
+      <div style={{ maxWidth: 1200, margin: "0 auto" }}>
         <div
           style={{
-            flex: 1,
-            height: 460,
-            borderRadius: 16,
-            backgroundColor: colors.lightBg,
+            fontFamily: "Urbanist, sans-serif",
+            fontSize: 14,
+            fontWeight: 600,
+            color: "#1B4332",
+            textTransform: "uppercase",
+            letterSpacing: "2px",
+            marginBottom: 20,
           }}
-        />
+        >
+          A Propos
+        </div>
 
-        {/* Right Content */}
-        <div style={{ flex: 1 }}>
-          <span
-            style={{
-              fontSize: 18,
-              fontWeight: 700,
-              color: colors.accent,
-              fontFamily: "Satoshi, system-ui, sans-serif",
-              display: "block",
-              marginBottom: 16,
-            }}
-          >
-            Votre specialiste rideau metallique
-          </span>
-          <h2
-            style={{
-              fontSize: 40,
-              fontWeight: 700,
-              fontFamily: "Satoshi, system-ui, sans-serif",
-              color: colors.primary,
-              lineHeight: 1.2,
-              margin: "0 0 20px 0",
-            }}
-          >
-            {siteConfig.experience} ans d&apos;expertise en fermetures metalliques a {siteConfig.city}
-          </h2>
-          <p
-            style={{
-              fontSize: 16,
-              fontFamily: "Satoshi, system-ui, sans-serif",
-              color: colors.textMuted,
-              lineHeight: 1.7,
-              margin: "0 0 32px 0",
-            }}
-          >
-            {siteConfig.fullName} intervient sur tous types de rideaux metalliques,
-            grilles de defence et fermetures pour commerces et industriels dans le
-            2e arrondissement de Paris et alentours. Notre equipe de techniciens
-            qualifies assure un service rapide et professionnel.
-          </p>
+        <h2
+          style={{
+            fontFamily: "Urbanist, sans-serif",
+            fontSize: 40,
+            fontWeight: 600,
+            color: "#1B4332",
+            lineHeight: 1.3,
+            maxWidth: 700,
+            margin: "0 0 24px 0",
+          }}
+          className="about-h2"
+        >
+          Specialistes du rideau metallique a Paris 2e depuis plus de 25 ans
+        </h2>
 
-          {/* Checklist */}
-          <div
-            style={{
-              display: "flex",
-              flexDirection: "column",
-              gap: 16,
-              marginBottom: 32,
-            }}
-          >
-            {checklistItems.map((item) => (
-              <div
-                key={item}
-                style={{ display: "flex", alignItems: "center", gap: 12 }}
-              >
-                <div
-                  style={{
-                    width: 24,
-                    height: 24,
-                    borderRadius: "50%",
-                    backgroundColor: `rgba(224,122,95,0.1)`,
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "center",
-                    flexShrink: 0,
-                  }}
-                >
-                  <span style={{ color: colors.accent, fontSize: 14, fontWeight: 700 }}>
-                    &#10003;
-                  </span>
-                </div>
-                <span
-                  style={{
-                    fontSize: 16,
-                    fontFamily: "Satoshi, system-ui, sans-serif",
-                    color: colors.primary,
-                    fontWeight: 500,
-                  }}
-                >
-                  {item}
-                </span>
-              </div>
-            ))}
+        <p
+          style={{
+            fontFamily: "Urbanist, sans-serif",
+            fontSize: 17,
+            fontWeight: 400,
+            color: "#555555",
+            lineHeight: 1.7,
+            maxWidth: 600,
+            marginBottom: 48,
+          }}
+        >
+          DRM Paris 2 intervient dans le quartier du Sentier, de la Bourse et des
+          Grands Boulevards pour le depannage, la reparation et l&apos;installation
+          de rideaux metalliques. Nos techniciens certifies se deplacent avec un
+          vehicule atelier equipe de toutes les pieces necessaires.
+        </p>
+
+        {/* 3 images row */}
+        <div style={{ display: "flex", gap: 20 }} className="about-images">
+          <div style={{ flex: 1, height: 400, borderRadius: 12, overflow: "hidden", position: "relative" }}>
+            <img
+              src="/images/gallery/depannage-rideau-metallique-DRM-reparation.webp"
+              alt="Technicien DRM en intervention sur rideau metallique Paris 2"
+              style={{ width: "100%", height: "100%", objectFit: "cover" }}
+            />
           </div>
-
-          <a
-            href={siteConfig.phoneLink}
-            style={{
-              display: "inline-flex",
-              alignItems: "center",
-              justifyContent: "center",
-              height: 51,
-              padding: "12px 24px",
-              borderRadius: 58,
-              backgroundColor: colors.accent,
-              color: "#FFFFFF",
-              fontSize: 16,
-              fontWeight: 700,
-              textDecoration: "none",
-              fontFamily: "Satoshi, system-ui, sans-serif",
-            }}
-          >
-            Appelez le {siteConfig.phone}
-          </a>
+          <div style={{ flex: 1, height: 400, borderRadius: 12, overflow: "hidden", position: "relative" }}>
+            <img
+              src="/images/gallery/installation-rideau-metallique-drm.webp"
+              alt="Installation rideau metallique commerce Paris 2e arrondissement"
+              style={{ width: "100%", height: "100%", objectFit: "cover" }}
+            />
+          </div>
+          <div style={{ flex: 1, height: 400, borderRadius: 12, overflow: "hidden", position: "relative" }}>
+            <img
+              src="/images/gallery/realisation-rideau-metallique-lame-pleine-commerce.webp"
+              alt="Realisation rideau metallique lames pleines sur commerce Paris"
+              style={{ width: "100%", height: "100%", objectFit: "cover" }}
+            />
+          </div>
         </div>
       </div>
+
+      <style>{`
+        @media (max-width: 768px) {
+          .about-h2 { font-size: 28px !important; }
+          .about-images { flex-direction: column !important; }
+          .about-images > div { height: 240px !important; }
+        }
+      `}</style>
     </section>
   );
 }

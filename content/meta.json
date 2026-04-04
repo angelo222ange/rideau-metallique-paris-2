@@ -1,7 +1,7 @@
 {
-  "template_id": "template-6",
-  "template_name": "FixFlow",
-  "template_source": "https://fixflow.framer.ai/?via=arini",
+  "template_id": "template-13",
+  "template_name": "Roofora",
+  "template_source": "cloned",
   "ville": "Paris 2",
   "departement": "Paris",
   "departement_code": "75",
@@ -9,43 +9,44 @@
   "domaine": "depannagerideau-metallique-paris-2.fr",
   "section_mapping": {
     "hero": "hero",
-    "quick-service": "cta_urgence_rapide",
     "about": "presentation",
-    "counter": "stats_confiance",
     "services": "services_drm",
-    "process": "methode_depannage",
-    "why-choose": "avantages_drm",
-    "testimonials": "avis_google",
-    "portfolio": "realisations",
-    "cta": "cta_urgence",
+    "industries": "stats_confiance",
+    "projects": "realisations",
+    "how_it_works": "methode_depannage",
+    "reviews": "avis_google",
     "faq": "faq_drm",
     "blog": "blog",
+    "cta": "cta_urgence",
     "footer": "footer"
   },
-  "missing_sections": ["zones_intervention", "seo_content", "logos_confiance"],
+  "missing_sections": [
+    "zones_intervention",
+    "seo_content"
+  ],
   "design_tokens": {
     "colors": {
-      "primary": "#1C2541",
-      "accent": "#E07A5F",
-      "light_bg": "#F4F1EE",
-      "dark_bg": "#1C2541"
+      "primary": "#1B4332",
+      "accent": "#C9A84C",
+      "light_bg": "#F5F0E8",
+      "dark_bg": "#0F2B21"
     },
     "fonts": {
-      "heading": "Satoshi",
-      "body": "Satoshi"
+      "heading": "Urbanist",
+      "body": "Urbanist"
     },
     "layout": {
       "max_width": 1200,
       "section_padding": "120px 30px",
-      "card_radius": 16,
-      "button_radius": 58
+      "card_radius": 12,
+      "button_radius": 0
     }
   },
   "palette": {
-    "inspiration": "Indigo profond des toits parisiens et terracotta des facades haussmanniennes du 2e arrondissement",
-    "primary": "#1C2541",
-    "accent": "#E07A5F",
-    "light_bg": "#F4F1EE"
+    "inspiration": "Forest green + or/laiton — Bourse, quartier Sentier, Paris 2e arrondissement",
+    "primary": "#1B4332",
+    "accent": "#C9A84C",
+    "light_bg": "#F5F0E8"
   },
   "created_at": "2026-04-03"
 }

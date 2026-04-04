@@ -1,283 +1,78 @@
-"use client";
-
-import { useState } from "react";
-import { siteConfig, colors } from "@/config/site";
+import { Metadata } from "next";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 
+export const metadata: Metadata = {
+  title: "Contact | DRM Paris 2 — Depannage Rideau Metallique",
+  description: "Contactez DRM Paris 2 pour un depannage rideau metallique urgence. 09 72 12 41 41. Devis gratuit, intervention 24h/24.",
+  alternates: { canonical: "https://depannagerideau-metallique-paris-2.fr/contact/" },
+};
+
 export default function ContactPage() {
-  const [formData, setFormData] = useState({
-    nom: "",
-    telephone: "",
-    email: "",
-    prestation: "devis",
-    message: "",
-  });
-  const [sent, setSent] = useState(false);
-
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    try {
-      await fetch(process.env.NEXT_PUBLIC_WEBHOOK_URL || "https://lioai.app.n8n.cloud/webhook/drm-contact", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          ...formData,
-          source: `${siteConfig.domain}-contact-form`,
-          brand: `DRM ${siteConfig.city}`,
-          city: siteConfig.city,
-          sitePhone: siteConfig.phone,
-          submittedAt: new Date().toISOString(),
-        }),
-      });
-      setSent(true);
-    } catch {
-      setSent(true);
-    }
-  };
-
   return (
     <>
       <Header />
       <main>
-        <section
-          style={{
-            padding: "180px 30px 80px",
-            backgroundColor: colors.primary,
-          }}
-        >
-          <div style={{ maxWidth: 800, margin: "0 auto", textAlign: "center" }}>
-            <h1
-              style={{
-                fontSize: 48,
-                fontWeight: 700,
-                fontFamily: "Satoshi, system-ui, sans-serif",
-                color: "#FFFFFF",
-                margin: "0 0 16px 0",
-              }}
-            >
-              Contactez DRM {siteConfig.city}
+        <section style={{ padding: "160px 30px 80px", backgroundColor: "#1B4332" }}>
+          <div style={{ maxWidth: 1200, margin: "0 auto" }}>
+            <h1 style={{ fontFamily: "Urbanist, sans-serif", fontSize: 48, fontWeight: 600, color: "#FFFFFF", marginBottom: 16 }} className="contact-h1">
+              Contactez DRM Paris 2
             </h1>
-            <p
-              style={{
-                fontSize: 18,
-                fontFamily: "Satoshi, system-ui, sans-serif",
-                color: "rgba(255,255,255,0.7)",
-                margin: 0,
-              }}
-            >
-              Besoin d&apos;un depannage urgent ? Appelez le{" "}
-              <a
-                href={siteConfig.phoneLink}
-                style={{ color: colors.accent, textDecoration: "none", fontWeight: 700 }}
-              >
-                {siteConfig.phone}
-              </a>
+            <p style={{ fontFamily: "Urbanist, sans-serif", fontSize: 17, color: "rgba(255,255,255,0.7)", maxWidth: 600, lineHeight: 1.6 }}>
+              Rideau metallique bloque ? Besoin d&apos;un devis ? Appelez-nous ou remplissez le formulaire ci-dessous.
             </p>
           </div>
         </section>
 
         <section style={{ padding: "80px 30px", backgroundColor: "#FFFFFF" }}>
-          <div
-            style={{
-              maxWidth: 1200,
-              margin: "0 auto",
-              display: "flex",
-              gap: 60,
-            }}
-          >
-            {/* Form */}
+          <div style={{ maxWidth: 1200, margin: "0 auto", display: "flex", gap: 60 }} className="contact-layout">
+            {/* Contact info */}
             <div style={{ flex: 1 }}>
-              {sent ? (
-                <div
-                  style={{
-                    backgroundColor: colors.lightBg,
-                    borderRadius: 16,
-                    padding: 48,
-                    textAlign: "center",
-                  }}
-                >
-                  <h2
-                    style={{
-                      fontSize: 28,
-                      fontWeight: 700,
-                      color: colors.primary,
-                      fontFamily: "Satoshi, system-ui, sans-serif",
-                      margin: "0 0 16px 0",
-                    }}
-                  >
-                    Message envoye
-                  </h2>
-                  <p style={{ fontSize: 16, color: colors.textMuted, fontFamily: "Satoshi, system-ui, sans-serif" }}>
-                    Nous vous recontacterons dans les plus brefs delais.
-                  </p>
-                </div>
-              ) : (
-                <form
-                  onSubmit={handleSubmit}
-                  style={{
-                    backgroundColor: colors.lightBg,
-                    borderRadius: 16,
-                    padding: 32,
-                    display: "flex",
-                    flexDirection: "column",
-                    gap: 16,
-                  }}
-                >
-                  <input
-                    type="text"
-                    placeholder="Votre nom"
-                    required
-                    value={formData.nom}
-                    onChange={(e) => setFormData({ ...formData, nom: e.target.value })}
-                    style={{
-                      height: 52,
-                      padding: "0 20px",
-                      borderRadius: 12,
-                      border: "1px solid #E5E7EB",
-                      backgroundColor: "#FFFFFF",
-                      fontSize: 16,
-                      fontFamily: "Satoshi, system-ui, sans-serif",
-                      color: colors.primary,
-                      outline: "none",
-                    }}
-                  />
-                  <input
-                    type="tel"
-                    placeholder="Votre telephone"
-                    required
-                    value={formData.telephone}
-                    onChange={(e) => setFormData({ ...formData, telephone: e.target.value })}
-                    style={{
-                      height: 52,
-                      padding: "0 20px",
-                      borderRadius: 12,
-                      border: "1px solid #E5E7EB",
-                      backgroundColor: "#FFFFFF",
-                      fontSize: 16,
-                      fontFamily: "Satoshi, system-ui, sans-serif",
-                      color: colors.primary,
-                      outline: "none",
-                    }}
-                  />
-                  <input
-                    type="email"
-                    placeholder="Votre email"
-                    value={formData.email}
-                    onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                    style={{
-                      height: 52,
-                      padding: "0 20px",
-                      borderRadius: 12,
-                      border: "1px solid #E5E7EB",
-                      backgroundColor: "#FFFFFF",
-                      fontSize: 16,
-                      fontFamily: "Satoshi, system-ui, sans-serif",
-                      color: colors.primary,
-                      outline: "none",
-                    }}
-                  />
-                  <textarea
-                    placeholder="Decrivez votre besoin"
-                    rows={4}
-                    value={formData.message}
-                    onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                    style={{
-                      padding: "16px 20px",
-                      borderRadius: 12,
-                      border: "1px solid #E5E7EB",
-                      backgroundColor: "#FFFFFF",
-                      fontSize: 16,
-                      fontFamily: "Satoshi, system-ui, sans-serif",
-                      color: colors.primary,
-                      outline: "none",
-                      resize: "vertical",
-                    }}
-                  />
-                  <button
-                    type="submit"
-                    style={{
-                      height: 51,
-                      borderRadius: 58,
-                      backgroundColor: colors.accent,
-                      color: "#FFFFFF",
-                      fontSize: 16,
-                      fontWeight: 700,
-                      fontFamily: "Satoshi, system-ui, sans-serif",
-                      border: "none",
-                      cursor: "pointer",
-                    }}
-                  >
-                    Envoyer ma demande
-                  </button>
-                </form>
-              )}
-            </div>
-
-            {/* Contact Info */}
-            <div style={{ flex: 1 }}>
-              <h2
-                style={{
-                  fontSize: 28,
-                  fontWeight: 700,
-                  fontFamily: "Satoshi, system-ui, sans-serif",
-                  color: colors.primary,
-                  margin: "0 0 32px 0",
-                }}
-              >
+              <h2 style={{ fontFamily: "Urbanist, sans-serif", fontSize: 28, fontWeight: 600, color: "#1B4332", marginBottom: 32 }}>
                 Nos coordonnees
               </h2>
-              {[
-                { label: "Telephone", value: siteConfig.phone, href: siteConfig.phoneLink },
-                { label: "Email", value: siteConfig.email, href: `mailto:${siteConfig.email}` },
-                { label: "Adresse", value: siteConfig.address, href: undefined },
-                { label: "Horaires", value: siteConfig.openingHours, href: undefined },
-              ].map((item) => (
-                <div key={item.label} style={{ marginBottom: 24 }}>
-                  <span
-                    style={{
-                      fontSize: 14,
-                      fontWeight: 700,
-                      color: colors.accent,
-                      fontFamily: "Satoshi, system-ui, sans-serif",
-                      display: "block",
-                      marginBottom: 4,
-                    }}
-                  >
-                    {item.label}
-                  </span>
-                  {item.href ? (
-                    <a
-                      href={item.href}
-                      style={{
-                        fontSize: 18,
-                        fontWeight: 600,
-                        color: colors.primary,
-                        fontFamily: "Satoshi, system-ui, sans-serif",
-                        textDecoration: "none",
-                      }}
-                    >
-                      {item.value}
-                    </a>
-                  ) : (
-                    <span
-                      style={{
-                        fontSize: 18,
-                        fontWeight: 600,
-                        color: colors.primary,
-                        fontFamily: "Satoshi, system-ui, sans-serif",
-                      }}
-                    >
-                      {item.value}
-                    </span>
-                  )}
+              <div style={{ display: "flex", flexDirection: "column", gap: 24 }}>
+                <div>
+                  <div style={{ fontFamily: "Urbanist, sans-serif", fontSize: 14, fontWeight: 600, color: "#C9A84C", textTransform: "uppercase", letterSpacing: "1px", marginBottom: 8 }}>Telephone</div>
+                  <a href="tel:+33972124141" style={{ fontFamily: "Urbanist, sans-serif", fontSize: 24, fontWeight: 700, color: "#1B4332", textDecoration: "none" }}>09 72 12 41 41</a>
                 </div>
-              ))}
+                <div>
+                  <div style={{ fontFamily: "Urbanist, sans-serif", fontSize: 14, fontWeight: 600, color: "#C9A84C", textTransform: "uppercase", letterSpacing: "1px", marginBottom: 8 }}>Adresse</div>
+                  <p style={{ fontFamily: "Urbanist, sans-serif", fontSize: 16, color: "#555" }}>Impasse des Peintres, 75002 Paris</p>
+                </div>
+                <div>
+                  <div style={{ fontFamily: "Urbanist, sans-serif", fontSize: 14, fontWeight: 600, color: "#C9A84C", textTransform: "uppercase", letterSpacing: "1px", marginBottom: 8 }}>Horaires</div>
+                  <p style={{ fontFamily: "Urbanist, sans-serif", fontSize: 16, color: "#555" }}>24h/24, 7j/7 — week-ends et jours feries inclus</p>
+                </div>
+                <div>
+                  <div style={{ fontFamily: "Urbanist, sans-serif", fontSize: 14, fontWeight: 600, color: "#C9A84C", textTransform: "uppercase", letterSpacing: "1px", marginBottom: 8 }}>Email</div>
+                  <p style={{ fontFamily: "Urbanist, sans-serif", fontSize: 16, color: "#555" }}>contact@depannagerideau-metallique-paris-2.fr</p>
+                </div>
+              </div>
+            </div>
+
+            {/* Contact form placeholder — Phase 4 adds webhook */}
+            <div style={{ flex: 1 }}>
+              <div style={{ backgroundColor: "#F5F0E8", borderRadius: 12, padding: 40 }}>
+                <h3 style={{ fontFamily: "Urbanist, sans-serif", fontSize: 22, fontWeight: 600, color: "#1B4332", marginBottom: 24, marginTop: 0 }}>
+                  Demander un devis gratuit
+                </h3>
+                <p style={{ fontFamily: "Urbanist, sans-serif", fontSize: 15, color: "#666", lineHeight: 1.6 }}>
+                  Formulaire de contact — sera active en Phase 4.
+                </p>
+              </div>
             </div>
           </div>
         </section>
       </main>
       <Footer />
+
+      <style>{`
+        @media (max-width: 768px) {
+          .contact-h1 { font-size: 32px !important; }
+          .contact-layout { flex-direction: column !important; gap: 40px !important; }
+        }
+      `}</style>
     </>
   );
 }

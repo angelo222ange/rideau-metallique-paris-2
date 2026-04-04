@@ -1,5 +1,3 @@
-import Link from "next/link";
-import { siteConfig, colors } from "@/config/site";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 
@@ -7,91 +5,53 @@ export default function NotFound() {
   return (
     <>
       <Header />
-      <main>
-        <section
-          style={{
-            padding: "220px 30px 120px",
-            backgroundColor: colors.primary,
-            textAlign: "center",
-          }}
-        >
-          <div style={{ maxWidth: 600, margin: "0 auto" }}>
-            <div
-              style={{
-                fontSize: 120,
-                fontWeight: 700,
-                color: colors.accent,
-                fontFamily: "Satoshi, system-ui, sans-serif",
-                lineHeight: 1,
-                marginBottom: 24,
-              }}
-            >
-              404
-            </div>
-            <h1
-              style={{
-                fontSize: 36,
-                fontWeight: 700,
-                fontFamily: "Satoshi, system-ui, sans-serif",
-                color: "#FFFFFF",
-                margin: "0 0 16px 0",
-              }}
-            >
-              Page introuvable
-            </h1>
-            <p
-              style={{
-                fontSize: 18,
-                fontFamily: "Satoshi, system-ui, sans-serif",
-                color: "rgba(255,255,255,0.7)",
-                margin: "0 0 40px 0",
-              }}
-            >
-              La page que vous cherchez n&apos;existe pas ou a ete deplacee.
-            </p>
-            <div style={{ display: "flex", gap: 16, justifyContent: "center" }}>
-              <Link
-                href="/"
-                style={{
-                  display: "inline-flex",
-                  alignItems: "center",
-                  height: 51,
-                  padding: "12px 24px",
-                  borderRadius: 58,
-                  backgroundColor: colors.accent,
-                  color: "#FFFFFF",
-                  fontSize: 16,
-                  fontWeight: 700,
-                  textDecoration: "none",
-                  fontFamily: "Satoshi, system-ui, sans-serif",
-                }}
-              >
-                Retour a l&apos;accueil
-              </Link>
-              <a
-                href={siteConfig.phoneLink}
-                style={{
-                  display: "inline-flex",
-                  alignItems: "center",
-                  height: 51,
-                  padding: "12px 24px",
-                  borderRadius: 58,
-                  backgroundColor: "transparent",
-                  color: "#FFFFFF",
-                  fontSize: 16,
-                  fontWeight: 700,
-                  textDecoration: "none",
-                  fontFamily: "Satoshi, system-ui, sans-serif",
-                  border: "2px solid rgba(255,255,255,0.3)",
-                  gap: 8,
-                }}
-              >
-                <span style={{ fontSize: 18 }}>&#9742;</span>
-                {siteConfig.phone}
-              </a>
-            </div>
-          </div>
-        </section>
+      <main style={{ padding: "200px 30px 120px", textAlign: "center", minHeight: "70vh" }}>
+        <h1 style={{ fontFamily: "Urbanist, sans-serif", fontSize: 72, fontWeight: 700, color: "#C9A84C", marginBottom: 16 }}>
+          404
+        </h1>
+        <p style={{ fontFamily: "Urbanist, sans-serif", fontSize: 20, fontWeight: 500, color: "#1B4332", marginBottom: 32 }}>
+          Page non trouvee
+        </p>
+        <p style={{ fontFamily: "Urbanist, sans-serif", fontSize: 16, color: "#555", marginBottom: 40, maxWidth: 500, margin: "0 auto 40px" }}>
+          La page que vous recherchez n&apos;existe pas ou a ete deplacee.
+        </p>
+        <div style={{ display: "flex", gap: 16, justifyContent: "center", flexWrap: "wrap" }}>
+          <a
+            href="/"
+            style={{
+              fontFamily: "Urbanist, sans-serif",
+              fontSize: 16,
+              fontWeight: 600,
+              backgroundColor: "#C9A84C",
+              color: "#1B4332",
+              padding: "16px 28px",
+              borderRadius: 0,
+              textDecoration: "none",
+              display: "inline-flex",
+              alignItems: "center",
+            }}
+          >
+            Retour a l&apos;accueil
+          </a>
+          <a
+            href="tel:+33972124141"
+            style={{
+              fontFamily: "Urbanist, sans-serif",
+              fontSize: 16,
+              fontWeight: 600,
+              backgroundColor: "transparent",
+              color: "#1B4332",
+              padding: "16px 28px",
+              borderRadius: 0,
+              textDecoration: "none",
+              border: "1px solid #1B4332",
+              display: "inline-flex",
+              alignItems: "center",
+            }}
+          >
+            09 72 12 41 41
+          </a>
+        </div>
       </main>
       <Footer />
     </>

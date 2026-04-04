@@ -1,13 +1,13 @@
 import { Metadata } from "next";
 import Link from "next/link";
-import { siteConfig, services, zones, colors } from "@/config/site";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import { zones, services } from "@/config/site";
 
 export const metadata: Metadata = {
-  title: `Zones d'intervention | DRM ${siteConfig.city}`,
-  description: `DRM ${siteConfig.city} intervient dans ${zones.length}+ communes autour du 2e arrondissement. Depannage rideau metallique rapide. ${siteConfig.phone}`,
-  alternates: { canonical: `${siteConfig.url}/zones/` },
+  title: "Zones d'intervention | DRM Paris 2 — Rideau Metallique",
+  description: "DRM Paris 2 intervient dans 22 zones : tous les arrondissements de Paris + Boulogne, Levallois, Neuilly. 09 72 12 41 41.",
+  alternates: { canonical: "https://depannagerideau-metallique-paris-2.fr/zones/" },
 };
 
 export default function ZonesPage() {
@@ -15,118 +15,52 @@ export default function ZonesPage() {
     <>
       <Header />
       <main>
-        <section
-          style={{
-            padding: "180px 30px 80px",
-            backgroundColor: colors.primary,
-          }}
-        >
-          <div style={{ maxWidth: 800, margin: "0 auto", textAlign: "center" }}>
-            <h1
-              style={{
-                fontSize: 48,
-                fontWeight: 700,
-                fontFamily: "Satoshi, system-ui, sans-serif",
-                color: "#FFFFFF",
-                margin: "0 0 16px 0",
-              }}
-            >
+        <section style={{ padding: "160px 30px 80px", backgroundColor: "#1B4332" }}>
+          <div style={{ maxWidth: 1200, margin: "0 auto" }}>
+            <h1 style={{ fontFamily: "Urbanist, sans-serif", fontSize: 48, fontWeight: 600, color: "#FFFFFF", marginBottom: 16 }} className="zones-h1">
               Zones d&apos;intervention
             </h1>
-            <p
-              style={{
-                fontSize: 18,
-                fontFamily: "Satoshi, system-ui, sans-serif",
-                color: "rgba(255,255,255,0.7)",
-                margin: 0,
-              }}
-            >
-              Nous intervenons dans tout Paris et les communes limitrophes en moins de {siteConfig.delai} minutes.
+            <p style={{ fontFamily: "Urbanist, sans-serif", fontSize: 17, color: "rgba(255,255,255,0.7)", maxWidth: 600, lineHeight: 1.6 }}>
+              Nos techniciens interviennent dans tout Paris et les communes limitrophes.
             </p>
           </div>
         </section>
 
         <section style={{ padding: "80px 30px", backgroundColor: "#FFFFFF" }}>
           <div style={{ maxWidth: 1200, margin: "0 auto" }}>
-            <div
-              style={{
-                display: "grid",
-                gridTemplateColumns: "repeat(3, 1fr)",
-                gap: 24,
-              }}
-            >
+            <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 20 }} className="zones-grid">
               {zones.map((zone) => (
                 <div
                   key={zone.slug}
                   style={{
-                    backgroundColor: colors.lightBg,
-                    borderRadius: 16,
+                    border: "1px solid #E5E5E5",
+                    borderRadius: 12,
                     padding: 24,
                   }}
                 >
-                  <div
-                    style={{
-                      display: "flex",
-                      justifyContent: "space-between",
-                      alignItems: "center",
-                      marginBottom: 12,
-                    }}
-                  >
-                    <h2
-                      style={{
-                        fontSize: 20,
-                        fontWeight: 700,
-                        fontFamily: "Satoshi, system-ui, sans-serif",
-                        color: colors.primary,
-                        margin: 0,
-                      }}
-                    >
-                      {zone.name}
-                    </h2>
-                    <span
-                      style={{
-                        fontSize: 13,
-                        color: colors.accent,
-                        fontFamily: "Satoshi, system-ui, sans-serif",
-                        fontWeight: 600,
-                      }}
-                    >
-                      {zone.distance}
-                    </span>
-                  </div>
-                  <p
-                    style={{
-                      fontSize: 14,
-                      color: colors.textMuted,
-                      fontFamily: "Satoshi, system-ui, sans-serif",
-                      margin: "0 0 12px 0",
-                    }}
-                  >
-                    {zone.postalCode}
+                  <h3 style={{ fontFamily: "Urbanist, sans-serif", fontSize: 18, fontWeight: 600, color: "#1B4332", marginBottom: 4, marginTop: 0 }}>
+                    {zone.name}
+                  </h3>
+                  <p style={{ fontFamily: "Urbanist, sans-serif", fontSize: 13, color: "#888", marginBottom: 16 }}>
+                    {zone.postalCode} — {zone.distance}
                   </p>
-                  <div
-                    style={{
-                      display: "flex",
-                      flexWrap: "wrap",
-                      gap: 8,
-                    }}
-                  >
-                    {services.slice(0, 3).map((service) => (
+                  <div style={{ display: "flex", flexWrap: "wrap", gap: 6 }}>
+                    {services.slice(0, 3).map((svc) => (
                       <Link
-                        key={service.id}
-                        href={`/${service.slug}-${zone.slug}/`}
+                        key={svc.id}
+                        href={`/${svc.slug}-${zone.slug}/`}
                         style={{
+                          fontFamily: "Urbanist, sans-serif",
                           fontSize: 12,
+                          fontWeight: 500,
+                          color: "#1B4332",
+                          backgroundColor: "#F5F0E8",
                           padding: "4px 10px",
-                          borderRadius: 58,
-                          backgroundColor: "rgba(224,122,95,0.1)",
-                          color: colors.accent,
+                          borderRadius: 50,
                           textDecoration: "none",
-                          fontFamily: "Satoshi, system-ui, sans-serif",
-                          fontWeight: 600,
                         }}
                       >
-                        {service.name}
+                        {svc.name}
                       </Link>
                     ))}
                   </div>
@@ -137,6 +71,13 @@ export default function ZonesPage() {
         </section>
       </main>
       <Footer />
+
+      <style>{`
+        @media (max-width: 768px) {
+          .zones-h1 { font-size: 32px !important; }
+          .zones-grid { grid-template-columns: 1fr !important; }
+        }
+      `}</style>
     </>
   );
 }

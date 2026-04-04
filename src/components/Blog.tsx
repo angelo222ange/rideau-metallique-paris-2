@@ -1,159 +1,179 @@
 import Link from "next/link";
-import { colors } from "@/config/site";
+
+const posts = [
+  {
+    title: "Comment debloquer un rideau metallique coince : guide pratique",
+    category: "Depannage",
+    date: "Mars 2026",
+    slug: "debloquer-rideau-metallique-coince",
+    image: "/images/gallery/rideau-metallique-bloque-depannage-rideau-metallique.webp",
+  },
+  {
+    title: "Motorisation rideau metallique : quel moteur choisir ?",
+    category: "Motorisation",
+    date: "Fevrier 2026",
+    slug: "motorisation-rideau-metallique-quel-moteur",
+    image: "/images/gallery/moteur-tubulaire-rideau-metallique-drm.webp",
+  },
+  {
+    title: "Entretien rideau metallique : les gestes qui evitent les pannes",
+    category: "Entretien",
+    date: "Janvier 2026",
+    slug: "entretien-rideau-metallique-gestes-preventifs",
+    image: "/images/gallery/entretien-rideau-metallique-drm-france.webp",
+  },
+];
 
 export default function Blog() {
-  const posts = [
-    {
-      slug: "comment-debloquer-rideau-metallique",
-      date: "3 avril 2026",
-      title: "Comment debloquer un rideau metallique coince ?",
-      excerpt:
-        "Votre rideau metallique refuse de monter ou descendre ? Decouvrez les causes les plus frequentes et les gestes a adopter avant d'appeler un professionnel.",
-    },
-    {
-      slug: "entretien-rideau-metallique-guide",
-      date: "1 avril 2026",
-      title: "Guide d'entretien de votre rideau metallique",
-      excerpt:
-        "Un entretien regulier evite 80% des pannes. Voici les gestes simples a effectuer pour prolonger la duree de vie de votre fermeture metallique.",
-    },
-    {
-      slug: "motorisation-rideau-metallique-avantages",
-      date: "28 mars 2026",
-      title: "Les avantages de la motorisation de rideau metallique",
-      excerpt:
-        "Passer d'un rideau manuel a un rideau motorise offre confort, securite et gain de temps. Comparatif des moteurs Somfy, Simu et Nice.",
-    },
-  ];
-
   return (
     <section
       id="blog"
       style={{
         padding: "120px 30px",
-        backgroundColor: "#FFFFFF",
+        backgroundColor: "#F5F0E8",
       }}
     >
       <div style={{ maxWidth: 1200, margin: "0 auto" }}>
         <div
           style={{
             display: "flex",
-            justifyContent: "space-between",
             alignItems: "flex-end",
-            marginBottom: 60,
+            justifyContent: "space-between",
+            marginBottom: 48,
+            flexWrap: "wrap",
+            gap: 24,
           }}
         >
           <div>
-            <span
+            <div
               style={{
-                fontSize: 18,
-                fontWeight: 700,
-                color: colors.accent,
-                fontFamily: "Satoshi, system-ui, sans-serif",
-                display: "block",
-                marginBottom: 16,
+                fontFamily: "Urbanist, sans-serif",
+                fontSize: 14,
+                fontWeight: 600,
+                color: "#1B4332",
+                textTransform: "uppercase",
+                letterSpacing: "2px",
+                marginBottom: 20,
               }}
             >
-              Actualites
-            </span>
+              Blog
+            </div>
             <h2
               style={{
-                fontSize: 48,
-                fontWeight: 700,
-                fontFamily: "Satoshi, system-ui, sans-serif",
-                color: colors.primary,
-                lineHeight: 1.15,
+                fontFamily: "Urbanist, sans-serif",
+                fontSize: 40,
+                fontWeight: 600,
+                color: "#1B4332",
+                lineHeight: 1.2,
+                maxWidth: 500,
                 margin: 0,
               }}
+              className="blog-h2"
             >
-              Notre blog
+              Conseils et guides pour votre rideau metallique
             </h2>
           </div>
+
           <Link
             href="/blog/"
             style={{
+              fontFamily: "Urbanist, sans-serif",
+              fontSize: 16,
+              fontWeight: 600,
+              backgroundColor: "transparent",
+              color: "#1B4332",
+              padding: "18px 24px",
+              borderRadius: 0,
+              height: 55,
               display: "inline-flex",
               alignItems: "center",
               justifyContent: "center",
-              height: 51,
-              padding: "12px 24px",
-              borderRadius: 58,
-              backgroundColor: colors.accent,
-              color: "#FFFFFF",
-              fontSize: 16,
-              fontWeight: 700,
               textDecoration: "none",
-              fontFamily: "Satoshi, system-ui, sans-serif",
+              border: "1px solid #1B4332",
+              flexShrink: 0,
             }}
           >
             Tous les articles
           </Link>
         </div>
 
-        <div
-          style={{
-            display: "grid",
-            gridTemplateColumns: "repeat(3, 1fr)",
-            gap: 24,
-          }}
-        >
+        {/* Blog cards */}
+        <div style={{ display: "flex", gap: 20 }} className="blog-grid">
           {posts.map((post) => (
-            <Link key={post.slug} href={`/blog/${post.slug}/`} style={{ textDecoration: "none" }}>
-              <div
-                style={{
-                  borderRadius: 16,
-                  overflow: "hidden",
-                  backgroundColor: colors.lightBg,
-                }}
-              >
-                <div
-                  style={{
-                    height: 220,
-                    backgroundColor: "rgba(28,37,65,0.06)",
-                  }}
+            <Link
+              key={post.slug}
+              href={`/blog/${post.slug}/`}
+              style={{
+                flex: 1,
+                backgroundColor: "#FFFFFF",
+                border: "1px solid #E5E5E5",
+                borderRadius: 12,
+                overflow: "hidden",
+                textDecoration: "none",
+              }}
+            >
+              <div style={{ width: "100%", height: 220, overflow: "hidden" }}>
+                <img
+                  src={post.image}
+                  alt={post.title}
+                  style={{ width: "100%", height: "100%", objectFit: "cover" }}
                 />
-                <div style={{ padding: 24 }}>
+              </div>
+
+              <div style={{ padding: "24px 24px 28px" }}>
+                <div style={{ display: "flex", alignItems: "center", gap: 12, marginBottom: 14 }}>
                   <span
                     style={{
-                      fontSize: 14,
-                      color: colors.accent,
-                      fontFamily: "Satoshi, system-ui, sans-serif",
+                      fontFamily: "Urbanist, sans-serif",
+                      fontSize: 12,
                       fontWeight: 600,
-                      display: "block",
-                      marginBottom: 12,
+                      color: "#1B4332",
+                      textTransform: "uppercase",
+                      letterSpacing: "1px",
+                      backgroundColor: "#C9A84C",
+                      padding: "5px 10px",
+                      borderRadius: 0,
                     }}
                   >
+                    {post.category}
+                  </span>
+                  <span style={{ fontFamily: "Urbanist, sans-serif", fontSize: 13, fontWeight: 400, color: "#999999" }}>
                     {post.date}
                   </span>
-                  <h3
-                    style={{
-                      fontSize: 20,
-                      fontWeight: 700,
-                      fontFamily: "Satoshi, system-ui, sans-serif",
-                      color: colors.primary,
-                      margin: "0 0 12px 0",
-                      lineHeight: 1.3,
-                    }}
-                  >
-                    {post.title}
-                  </h3>
-                  <p
-                    style={{
-                      fontSize: 15,
-                      fontFamily: "Satoshi, system-ui, sans-serif",
-                      color: colors.textMuted,
-                      lineHeight: 1.7,
-                      margin: 0,
-                    }}
-                  >
-                    {post.excerpt}
-                  </p>
                 </div>
+
+                <h3 style={{ fontFamily: "Urbanist, sans-serif", fontSize: 18, fontWeight: 600, color: "#1B4332", lineHeight: 1.3, margin: "0 0 14px 0" }}>
+                  {post.title}
+                </h3>
+
+                <span
+                  style={{
+                    fontFamily: "Urbanist, sans-serif",
+                    fontSize: 14,
+                    fontWeight: 600,
+                    color: "#1B4332",
+                    display: "inline-flex",
+                    alignItems: "center",
+                    gap: 6,
+                  }}
+                >
+                  Lire la suite
+                  <svg width="14" height="14" viewBox="0 0 20 20" fill="none">
+                    <path d="M4 10H16M16 10L10 4M16 10L10 16" stroke="#1B4332" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                  </svg>
+                </span>
               </div>
             </Link>
           ))}
         </div>
       </div>
+
+      <style>{`
+        @media (max-width: 768px) {
+          .blog-grid { flex-direction: column !important; }
+          .blog-h2 { font-size: 28px !important; }
+        }
+      `}</style>
     </section>
   );
 }
